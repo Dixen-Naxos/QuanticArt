@@ -22,7 +22,7 @@ def rqga(current_val):
 
     circuit = QuantumCircuit(n)
     circuit.h(range(n))
-    rand_theta = np.random.uniform(0, 2 * np.pi / n, n)
+    rand_theta = np.random.uniform(0, np.pi / n, n)
     for i in range(n):
         circuit.rz(rand_theta[i], i)
 
@@ -36,17 +36,23 @@ def rqga(current_val):
     sim = Aer.get_backend('qasm_simulator')
     result = execute(circuit, backend=sim, shots=predictions).result().get_counts()
 
-    return max(result)
-    #return average(result, predictions)
+    #return max(result)
+    return average(result, predictions, n)
 
 
-def average(result, predictions):
+def average(result, predictions, size):
     sum = 0
+    div = 0
 
     for key in result.keys():
-        sum += (result[key] - int(predictions * 0.4) // len(result)) * int(key, 2)
+        if result[key] > predictions * 2 / 2**size:
+            sum += int(key, 2)
+            div += 1
 
-    return sum // int(predictions * 0.6)
+    if div == 0:
+        return max(result)
+
+    return sum // div
 
 
 def max(result):
