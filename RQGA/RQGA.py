@@ -17,8 +17,8 @@ def oracle(size, val_array):
 
 
 def rqga(current_val):
-    n = 8
-    predictions = 100
+    n = 6
+    predictions = 10000
 
     circuit = QuantumCircuit(n)
     circuit.h(range(n))
@@ -27,6 +27,9 @@ def rqga(current_val):
         circuit.rz(rand_theta[i], i)
 
     GIM = ia(2 ** n)
+
+    circuit.unitary(oracle(2**n, [current_val]), range(n), label='Oracle')
+    circuit.unitary(GIM, range(n), label='Grover Inv')
 
     circuit.unitary(oracle(2**n, [current_val]), range(n), label='Oracle')
     circuit.unitary(GIM, range(n), label='Grover Inv')
