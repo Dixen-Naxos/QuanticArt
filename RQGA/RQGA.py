@@ -16,8 +16,7 @@ def oracle(size, val_array):
     return _oracle
 
 
-def rqga(current_val):
-    n = 6
+def rqga(current_val, n):
     predictions = 10000
 
     circuit = QuantumCircuit(n)
