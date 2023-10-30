@@ -11,7 +11,7 @@ def initialize_population(population_size, gene_length):
 
 
 # Function to calculate the fitness of an individual (example fitness function)
-def calculate_fitness(individual):
+def fitness_function(individual):
     return sum(individual)
 
 
@@ -21,7 +21,7 @@ def select_parents(population, num_parents):
     tournament_size = 3
     for _ in range(num_parents):
         tournament = random.sample(population, tournament_size)
-        parents.append(max(tournament, key=calculate_fitness))
+        parents.append(max(tournament, key=fitness_function))
     return parents
 
 
@@ -52,7 +52,7 @@ def genetic_algorithm(population_size, gene_length, num_generations, mutation_ra
     population = initialize_population(population_size, gene_length)
     for generation in range(num_generations):
         # Calculate fitness of each individual
-        fitness_scores = [calculate_fitness(individual) for individual in population]
+        fitness_scores = [fitness_function(individual) for individual in population]
         # Select parents
         parents = select_parents(population, num_parents=2)
         # Perform crossover to create offspring
@@ -62,9 +62,9 @@ def genetic_algorithm(population_size, gene_length, num_generations, mutation_ra
         # Replace old population with offspring
         population = parents + offspring
         # Print best individual in this generation
-        best_individual = max(population, key=calculate_fitness)
+        best_individual = max(population, key=fitness_function)
         print(
-            f"Generation {generation + 1}: Best Individual - {best_individual} Fitness - {calculate_fitness(best_individual)}"
+            f"Generation {generation + 1}: Best Individual - {best_individual} Fitness - {fitness_function(best_individual)}"
         )
 
     end_time = time.time()  # Record the end time

@@ -10,11 +10,9 @@ generation_max = 450  # Define here the maximum number of generations/iterations
 # Initialize quantum circuit and classical register
 qc = QuantumCircuit(genome, genome)
 
-
 # Example fitness function
 def fitness_function(x):
-    return abs(x - 5 / 2 + np.sin(x))
-
+    return sum(x)  # Calculate sum of x values
 
 # Main loop for genetic algorithm
 for generation in range(generation_max):
@@ -35,7 +33,7 @@ for generation in range(generation_max):
     counts = result.get_counts()
 
     fitness_values = {
-        binary_string: fitness_function(int(binary_string, 2))
+        binary_string: fitness_function([int(bit) for bit in binary_string])
         for binary_string in counts.keys()
     }
     # Select top N individuals based on fitness
@@ -56,7 +54,6 @@ for generation in range(generation_max):
         print(
             "Binary String:", binary_string, "Fitness:", fitness_values[binary_string]
         )
-    print()
 
 # Execute the final circuit and plot the result
 qc.measure(range(genome), range(genome))
