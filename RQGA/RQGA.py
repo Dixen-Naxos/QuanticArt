@@ -16,9 +16,8 @@ def oracle(size, val_array):
     return _oracle
 
 
-def rqga(current_val):
-    n = 5
-    predictions = 100
+def rqga(current_val, n):
+    predictions = 10000
 
     circuit = QuantumCircuit(n)
     circuit.h(range(n))
@@ -31,13 +30,16 @@ def rqga(current_val):
     circuit.unitary(oracle(2**n, [current_val]), range(n), label='Oracle')
     circuit.unitary(GIM, range(n), label='Grover Inv')
 
+    circuit.unitary(oracle(2**n, [current_val]), range(n), label='Oracle')
+    circuit.unitary(GIM, range(n), label='Grover Inv')
+
     circuit.measure_all()
 
     sim = Aer.get_backend('qasm_simulator')
     result = execute(circuit, backend=sim, shots=predictions).result().get_counts()
 
-    #return max(result)
-    return average(result, predictions, n)
+    return max(result)
+    #return average(result, predictions, n)
 
 
 def average(result, predictions, size):
