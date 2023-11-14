@@ -29,43 +29,17 @@ def rqga(current_val, n):
 
     circuit.unitary(oracle(2 ** n, [current_val]), range(n), label='Oracle')
     circuit.unitary(GIM, range(n), label='Grover Inv')
-
     circuit.unitary(oracle(2 ** n, [current_val]), range(n), label='Oracle')
     circuit.unitary(GIM, range(n), label='Grover Inv')
 
     circuit.measure_all()
-    # TODO: Remove lines 37 to 55
-    circuit2 = QuantumCircuit(n)
-    circuit2.h(range(n))
-    rand_theta = np.random.uniform(0, np.pi / n, n)
-    for i in range(n):
-        circuit2.rz(rand_theta[i], i)
-
-    GIM = ia(2 ** n)
-
-    circuit2.unitary(oracle(2 ** n, [current_val]), range(n), label='Oracle')
-    circuit2.unitary(GIM, range(n), label='Grover Inv')
-
-    circuit2.unitary(oracle(2 ** n, [current_val]), range(n), label='Oracle')
-    circuit2.unitary(GIM, range(n), label='Grover Inv')
-
-    circuit2.measure_all()
-    sim2 = Aer.get_backend('qasm_simulator')
-    result = execute(circuit2, backend=sim2, shots=predictions * 10).result().get_counts()
-    print(f"max result : {max(result)}")
 
     sim = Aer.get_backend('qasm_simulator')
 
+    res2 = execute(circuit, backend=sim, shots=predictions).result().get_counts()
 
-    res2 = []
-    for i in range(100):
-        a = execute(circuit, backend=sim, shots=predictions).result().get_counts()
-        b = max(a)
-        res2.append(b)
-
-    print(f"res2 : {res2}")
-    return res2
-    # return average(result, predictions, n)
+    #return max(res2)
+    return average(res2, predictions, n)
 
 
 def average(result, predictions, size):
