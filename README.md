@@ -1,19 +1,23 @@
-# QuanticDream
+# QuanticArt
 
-## Pour les étapes de lancement :
- - Installer blender
- - Installer qiskit et qiskit-aer sur l'environnement python de blender
- - Ouvrir le fichier Rendu_spaghetti
- - Supprimer tous les objets
+## For Launch Steps:
+ - Install Blender
+ - Install qiskit and qiskit-aer on Blender's Python environment
+ - Open the file Rendu_spaghetti
+ - Delete all objects
 
-## Pour une génération à partir d'un objet complexe model :
- - Importer l'objet model, s'assurer qu'il est bien de type MESH et que ses vertex ont des coordonnées entière positives (cela fonctionnera aussi avec des nombres négatifs ou à virgule mais le résultat risque de ne pas correspondre exactement au model)
- - Sur les lignes 96 et 97 du script modifier le nom de l'objet model (actuellement : "Suzanne") par le nom de votre objet
- - Pour les très gros objets vous pouvez aussi modifier le nombre de qubits utiliser sur les lignes 79, 80, 81 (actuellement: 7, donc 2 puissance 7 = 128, notre objet fera maximum 128x128x128)
- - Lancer le script
+## For generation from a complex model object :
+ - Load the script "rqga_mesh"
+ - Import the model object, ensuring it is of MESH type and its vertices have positive integer coordinates (it will also work with negative or decimal numbers, but the result may not exactly match the model)
+ - When your model is on the scene set first_step to true it will resize the model
+ - After that set first_step to false to run the algorithme.
+ - On lines 93 of the script, change the name of the model object (currently: "Suzanne") to your object's name
+ - For very large objects, you can also modify the number of qubits used on lines 79, 80, 81 (currently: 7, so 2 to the power of 7 = 128, our object will be a maximum of 128x128x128)
+Run the script
+ - Run the script
 
-## Pour un objet random:
- - Décommenter les lignes 94 et 95
- - Replacer le nom de l'objet sur les lignes 96 et 97 par "Cube"
- - Vous pouvez modifier les paramètres de la fonction de la ligne 94 afin de faire varier le nombre de vertices et la taille de l'objet
- - Lancer le script
+## For a random object:
+ - Load the script "rqga_random"
+ - Replace the object name on lines 10 (currently: "Cube") to your object's name
+ - You can modify the parameters of the function on line 97 to vary the number of vertices and the size of the object
+ - Run the script
