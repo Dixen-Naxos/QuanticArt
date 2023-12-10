@@ -1,3 +1,4 @@
-qiskit
+qiskit~=0.44.2
 qiskit-aer
 qiskit[visualization]
+numpy~=1.26.1
