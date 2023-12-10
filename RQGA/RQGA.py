@@ -38,8 +38,8 @@ def rqga(current_val, n):
 
     res2 = execute(circuit, backend=sim, shots=predictions).result().get_counts()
 
-    #return max(res2)
-    return average(res2, predictions, n)
+    return max(res2)
+    #return average(res2, predictions, n)
 
 
 def average(result, predictions, size):
