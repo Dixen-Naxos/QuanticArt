@@ -7,7 +7,7 @@
 
 ## For generation from a complex model object:
  - Import the model object, ensuring it is of MESH type and its vertices have positive integer coordinates (it will also work with negative or decimal numbers, but the result may not exactly match the model)
- - On lines 93 of the script, change the name of the model object (currently: "Suzanne") to your object's name
+ - On lines 122 of the script, change the name of the model object (currently: "Suzanne") to your object's name
  - For very large objects, you can also modify the number of qubits defined in the variable qubits_number on line 29 of the script (currently: 7, so 2 to the power of 7 = 128, our object will be a maximum of 128x128x128)
  - Run the script
 
