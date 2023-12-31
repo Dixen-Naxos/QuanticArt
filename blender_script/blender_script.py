@@ -29,6 +29,7 @@ list_splines = []
 keyframes = []
 action = bpy.data.actions.new("MeshAnimation")
 data_path = "vertices[%d].co"
+qubits_number = 7
 
 
 def insert_keyframe(fcurves, frame, values):
@@ -108,9 +109,9 @@ def splines_evolution_v2(object_name, action):
         co_kf = (mesh_data.vertices[i].co.x, mesh_data.vertices[i].co.y, mesh_data.vertices[i].co.z)
         insert_keyframe(fcurves, i, co_kf)
 
-        vertices[i].co = (rqga(list_splines_model[vertice][0], 7), \
-                          rqga(list_splines_model[vertice][1], 7), \
-                          rqga(list_splines_model[vertice][2], 7))
+        vertices[i].co = (rqga(list_splines_model[vertice][0], qubits_number), \
+                          rqga(list_splines_model[vertice][1], qubits_number), \
+                          rqga(list_splines_model[vertice][2], qubits_number))
         vertice += 1
 
         co_kf = (mesh_data.vertices[i].co.x, mesh_data.vertices[i].co.y, mesh_data.vertices[i].co.z)
@@ -125,4 +126,3 @@ to_curve(model_name)
 init_list_splines(63)
 create_obj(100, f"{model_name}_evolutive", list_splines, action)
 splines_evolution_v2(f"{model_name}_evolutive", action)
-
