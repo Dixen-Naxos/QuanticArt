@@ -16,21 +16,21 @@ def oracle(size, val_array):
     return _oracle
 
 
-def rqga(current_val, n):
+def rqga(current_val, qubits_numbers):
     predictions = 10000
 
-    circuit = QuantumCircuit(n)
-    circuit.h(range(n))
-    rand_theta = np.random.uniform(0, np.pi / n, n)
-    for i in range(n):
+    circuit = QuantumCircuit(qubits_numbers)
+    circuit.h(range(qubits_numbers))
+    rand_theta = np.random.uniform(0, np.pi / qubits_numbers, qubits_numbers)
+    for i in range(qubits_numbers):
         circuit.rz(rand_theta[i], i)
 
-    GIM = ia(2 ** n)
+    GIM = ia(2 ** qubits_numbers)
 
-    circuit.unitary(oracle(2 ** n, [current_val]), range(n), label='Oracle')
-    circuit.unitary(GIM, range(n), label='Grover Inv')
-    circuit.unitary(oracle(2 ** n, [current_val]), range(n), label='Oracle')
-    circuit.unitary(GIM, range(n), label='Grover Inv')
+    circuit.unitary(oracle(2 ** qubits_numbers, [current_val]), range(qubits_numbers), label='Oracle')
+    circuit.unitary(GIM, range(qubits_numbers), label='Grover Inv')
+    circuit.unitary(oracle(2 ** qubits_numbers, [current_val]), range(qubits_numbers), label='Oracle')
+    circuit.unitary(GIM, range(qubits_numbers), label='Grover Inv')
 
     circuit.measure_all()
 

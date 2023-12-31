@@ -123,6 +123,6 @@ init_list_splines_model(model_name)
 
 to_curve(model_name)
 init_list_splines(63)
-create_obj(100, "Suzanne_evolutive", list_splines, action)
-splines_evolution_v2("Suzanne_evolutive", action)
+create_obj(100, f"{model_name}_evolutive", list_splines, action)
+splines_evolution_v2(f"{model_name}_evolutive", action)
 
